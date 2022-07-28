@@ -1,18 +1,24 @@
 import pygame, sys
 from screen import win, W, H
-from player import Player
+
+from playerANDgun import Player, Gun
+
 
 pygame.init
 
 
 egg = Player(W, H)
+gun = Gun(W, H)
 
 player_group = pygame.sprite.Group()
 player_group.add(egg)
+player_group.add(gun)
+
 
 
 def functionality():
     egg.rotate()
+    gun.rotate(egg.angle)
 
 
 def draw():
