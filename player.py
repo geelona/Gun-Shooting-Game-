@@ -26,4 +26,4 @@ class Player(pygame.sprite.Sprite):
         self.image_dummy = pygame.transform.rotate(self.image, self.angle)
 
     def update(self, win):
-        win.blit(self.image_dummy, self.coords)
+        win.blit(self.image_dummy, (self.coords[0] - self.image_dummy.get_width() // 2, self.coords[1] - self.image_dummy.get_height() // 2))
