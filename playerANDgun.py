@@ -54,5 +54,5 @@ class Gun(Main):
         self.blit_coordinates = (self.coordinates[0] + math.cos(rad) * 50, self.coordinates[1] + math.sin(rad) * 50)
 
     def update(self, win):
-        win.blit(self.image_dummy, (self.coordinates[0] - self.image_dummy.get_width() // 2,
-                                    self.coordinates[1] - self.image_dummy.get_height() // 2))
+        win.blit(self.image_dummy, (self.blit_coordinates[0] - self.image_dummy.get_width() // 2,
+                                    self.blit_coordinates[1] - self.image_dummy.get_height() // 2))
