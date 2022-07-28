@@ -18,6 +18,9 @@ def functionality():
     egg.rotate()
     gun.rotate(egg.angle)
 
+    egg.move()
+    gun.move()
+
 
 def draw():
     win.fill((255, 255, 255))

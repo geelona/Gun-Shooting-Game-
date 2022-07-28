@@ -13,9 +13,29 @@ class Main(pygame.sprite.Sprite):
     def __init__(self, w, h):
         super().__init__()
 
-        self.coordinates = (w // 2, h // 2)
+        self.w = w
+        self.h = h
+
+        self.coordinates = [w // 2, h // 2]
         self.blit_coordinates = None
         self.angle = 0
+
+    def move(self):
+        self.gravity()
+        self.wall_intersection()
+
+    def gravity(self):
+        self.coordinates = [self.coordinates[0], self.coordinates[1] + 1]
+
+    def wall_intersection(self):
+        if self.coordinates[0] > self.w + 60:
+            self.coordinates[0] = -60
+        if self.coordinates[0] < -60:
+            self.coordinates[0] = self.w + 60
+        if self.coordinates[1] > self.h + 60:
+            self.coordinates[1] = -60
+        if self.coordinates[1] < -60:
+            self.coordinates[1] = self.h + 60
 
 
 class Player(Main):
@@ -42,7 +62,6 @@ class Gun(Main):
         super().__init__(w, h)
         self.image = gun_img
         self.image_dummy = self.image
-        self.coordinates = (self.coordinates[0], self.coordinates[1])
 
     def rotate(self, angle):
         mx, my = pygame.mouse.get_pos()
