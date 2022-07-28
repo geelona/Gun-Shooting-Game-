@@ -1,11 +1,10 @@
-import pygame, sys
+import pygame
+import sys
 from screen import win, W, H
 
 from playerANDgun import Player, Gun
 
-
-pygame.init
-
+pygame.init()
 
 egg = Player(W, H)
 gun = Gun(W, H)
@@ -13,7 +12,6 @@ gun = Gun(W, H)
 player_group = pygame.sprite.Group()
 player_group.add(egg)
 player_group.add(gun)
-
 
 
 def functionality():
