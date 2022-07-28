@@ -19,10 +19,13 @@ class Main(pygame.sprite.Sprite):
         self.coordinates = [w // 2, h // 2]
         self.blit_coordinates = None
         self.angle = 0
+        
+        self.shot_force_count = 0
 
     def move(self):
         self.gravity()
         self.wall_intersection()
+        self.shot_force()
 
     def gravity(self):
         self.coordinates = [self.coordinates[0], self.coordinates[1] + 1]
@@ -36,6 +39,22 @@ class Main(pygame.sprite.Sprite):
             self.coordinates[1] = -60
         if self.coordinates[1] < -60:
             self.coordinates[1] = self.h + 60
+
+    def shot_force(self):
+        if self.shot_force_count > 0:
+            self.coordinates[0] -= self.dx
+            self.coordinates[1] -= self.dy
+            self.shot_force_count -= 1
+        else:
+            self.dx = 0
+            self.dy = 0
+
+    def shot(self):
+        mx, my = pygame.mouse.get_pos()
+        rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
+        self.dx = math.cos(rad) * 40
+        self.dy = math.sin(rad) * 20
+        self.shot_force_count = 10
 
 
 class Player(Main):
