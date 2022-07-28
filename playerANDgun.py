@@ -12,6 +12,7 @@ class Main(pygame.sprite.Sprite):
         super().__init__()
 
         self.coords = (W // 2, H // 2)
+        self.blit_coords = None
         self.angle = 0
 
 class Player(Main):
@@ -39,10 +40,15 @@ class Gun(Main):
         self.coords = (self.coords[0], self.coords[1])
 
     def rotate(self, angle):
-        self.angle = angle - 90
-        self.image_dummy = pygame.transform.rotate(self.image, self.angle)
+        mx, my = pygame.mouse.get_pos()
+
+        rad = math.atan2(my - self.coords[1], mx - self.coords[0])
+
+        self.image_dummy = pygame.transform.rotate(self.image, angle - 90)
+        
+        self.blit_coords = (self.coords[0] + math.cos(rad) * 50, self.coords[1] + math.sin(rad) * 50)
 
     def update(self, win):
-        win.blit(self.image_dummy, (self.coords[0] - self.image_dummy.get_width() // 2, self.coords[1] - self.image_dummy.get_height() // 2))
+        win.blit(self.image_dummy, (self.blit_coords[0] - self.image_dummy.get_width() // 2, self.blit_coords[1] - self.image_dummy.get_height() // 2))
 
 
