@@ -29,7 +29,7 @@ class Main(pygame.sprite.Sprite):
         self.shot_force()
 
     def gravity(self):
-        self.coordinates = [self.coordinates[0], self.coordinates[1] + 1]
+        self.coordinates = [self.coordinates[0], self.coordinates[1] + 2]
 
     def wall_intersection(self):
         if self.coordinates[0] > self.w + 60:
