@@ -19,7 +19,10 @@ class Main(pygame.sprite.Sprite):
         self.coordinates = [w // 2, h // 2]
         self.blit_coordinates = None
         self.angle = 0
-        
+
+        self.dx = 0
+        self.dy = 0
+
         self.shot_force_count = 0
 
     def move(self):
@@ -52,9 +55,9 @@ class Main(pygame.sprite.Sprite):
     def shot(self):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
-        self.dx = math.cos(rad) * 40
-        self.dy = math.sin(rad) * 20
-        self.shot_force_count = 10
+        self.dx = math.cos(rad) * 4
+        self.dy = math.sin(rad) * 2
+        self.shot_force_count = 100
 
 
 class Player(Main):
