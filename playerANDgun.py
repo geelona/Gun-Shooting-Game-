@@ -42,27 +42,27 @@ class Main(pygame.sprite.Sprite):
             self.coordinates[1] = self.h + 60
 
     def shot_force(self):
-        if int(self.dx) > 0:
+        if self.dx > 0:
             self.coordinates[0] -= self.dx
-        if int(self.dy) > 0:
+        if self.dy > 0:
             self.coordinates[1] -= self.dy
             self.dy -= 0.1
-        if int(self.dx) > 0 >= int(self.dy):
+        if self.dx > 0 >= self.dy:
             self.dx -= 0.05
 
-        if int(self.dx) < 0:
+        if self.dx < 0:
             self.coordinates[0] -= self.dx
-        if int(self.dy) < 0:
+        if self.dy < 0:
             self.coordinates[1] -= self.dy
             self.dy += 0.1
-        if int(self.dx) < 0 <= int(self.dy):
+        if self.dx < 0 <= self.dy:
             self.dx += 0.05
 
     def shot(self):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
         self.dx = math.cos(rad) * 12
-        self.dy = math.sin(rad) * 6
+        self.dy = math.sin(rad) * 8
 
 
 class Player(Main):
