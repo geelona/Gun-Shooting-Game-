@@ -29,7 +29,7 @@ class Main(pygame.sprite.Sprite):
         self.shot_force()
 
     def gravity(self):
-        self.coordinates = [self.coordinates[0], self.coordinates[1] + 1]
+        self.coordinates = [self.coordinates[0], self.coordinates[1] + 2]
 
     def wall_intersection(self):
         if self.coordinates[0] > self.w + 60:
@@ -61,8 +61,8 @@ class Main(pygame.sprite.Sprite):
     def shot(self):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
-        self.dx = math.cos(rad) * 12
-        self.dy = math.sin(rad) * 8
+        self.dx = math.cos(rad) * 8
+        self.dy = math.sin(rad) * 6
 
 
 class Player(Main):
