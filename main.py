@@ -29,6 +29,7 @@ def draw():
 
 
 def main():
+    clock = pygame.time.Clock()
     run = True
     while run:
         for event in pygame.event.get():
@@ -41,6 +42,7 @@ def main():
 
         functionality()
         draw()
+        clock.tick(60)
     pygame.quit()
     sys.exit()
 

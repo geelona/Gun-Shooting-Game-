@@ -44,19 +44,20 @@ class Main(pygame.sprite.Sprite):
             self.coordinates[1] = self.h + 60
 
     def shot_force(self):
+
+        self.coordinates[0] -= self.dx
         if self.shot_force_count > 0:
-            self.coordinates[0] -= self.dx
             self.coordinates[1] -= self.dy
             self.shot_force_count -= 1
+            print(self.dy)
         else:
-            self.dx = 0
             self.dy = 0
 
     def shot(self):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
-        self.dx = math.cos(rad) * 4
-        self.dy = math.sin(rad) * 2
+        self.dx = math.cos(rad) * 8
+        self.dy = math.sin(rad) * 4
         self.shot_force_count = 100
 
 
