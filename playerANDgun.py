@@ -1,10 +1,14 @@
 import pygame
 import math
 
-player_img = pygame.image.load('images/EvilUkrainianEgg.png')
+pygame.init()
+
+player_img = pygame.image.load('images/EvilUkrainianEgg.png').convert_alpha()
+player_img.set_alpha(255)
 player_img = pygame.transform.scale(player_img, (60, 60))
 
-gun_img = pygame.image.load('images/shotgun.png')
+gun_img = pygame.image.load('images/shotgun.png').convert_alpha()
+gun_img.set_alpha(255)
 gun_img = pygame.transform.scale(gun_img, (100, 100))
 
 
@@ -29,7 +33,7 @@ class Main(pygame.sprite.Sprite):
         self.shot_force()
 
     def gravity(self):
-        self.coordinates = [self.coordinates[0], self.coordinates[1] + 2]
+        self.coordinates = [self.coordinates[0], self.coordinates[1] + 3]
 
     def wall_intersection(self):
         if self.coordinates[0] > self.w + 60:
@@ -63,7 +67,7 @@ class Main(pygame.sprite.Sprite):
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
 
         self.dx = math.cos(rad) * 8
-        self.dy = math.sin(rad) * 6
+        self.dy = math.sin(rad) * 8
 
 
 class Player(Main):
