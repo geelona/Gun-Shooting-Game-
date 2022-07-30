@@ -3,7 +3,7 @@ import math
 
 pygame.init()
 
-player_img = pygame.image.load('images/EvilUkrainianEgg.png').convert_alpha()
+player_img = pygame.image.load('images/Egg.png').convert_alpha()
 player_img.set_alpha(255)
 player_img = pygame.transform.scale(player_img, (60, 60))
 
