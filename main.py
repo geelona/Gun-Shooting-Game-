@@ -1,8 +1,9 @@
 import pygame
 import sys
-from screen import win, W, H
 
+from screen import win, W, H
 from playerANDgun import Player, Gun
+from mapLoader import map_controller
 
 pygame.init()
 
@@ -22,10 +23,13 @@ def functionality():
     gun.move()
 
 
-def draw():
-    win.fill((255, 255, 255))
+def sprite_drawer():
     player_group.update(win)
-    pygame.display.update()
+
+
+def map_drawer():
+    win.fill((255, 255, 255))
+    map_controller(win)
 
 
 def main():
@@ -45,7 +49,10 @@ def main():
                 egg.shot()
 
         functionality()
-        draw()
+
+        map_drawer()
+        sprite_drawer()
+        pygame.display.update()
         clock.tick(60)
     pygame.quit()
     sys.exit()
