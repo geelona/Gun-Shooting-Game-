@@ -10,7 +10,7 @@ player_img = pygame.transform.scale(player_img, (player_size, player_size))
 
 gun_img = pygame.image.load('images/shotgun.png').convert_alpha()
 gun_img.set_alpha(255)
-gun_img = pygame.transform.scale(gun_img, (100, 100))
+gun_img = pygame.transform.scale(gun_img, (60, 60))
 
 
 class Main(pygame.sprite.Sprite):
@@ -83,7 +83,9 @@ class Player(Main):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(mx - self.coordinates[0], my - self.coordinates[1])
         self.angle = math.degrees(rad)
-        self.image_dummy = pygame.transform.rotate(self.image, self.angle)
+        # а что если не будем поворачивать спрайт? выглядит не оч просто
+        
+        
 
     def update(self, win):
         win.blit(self.image_dummy, (self.coordinates[0] - self.image_dummy.get_width() // 2,
@@ -101,10 +103,16 @@ class Gun(Main):
         mx, my = pygame.mouse.get_pos()
 
         rad = math.atan2(my - self.coordinates[1], mx - self.coordinates[0])
-
-        self.image_dummy = pygame.transform.rotate(self.image, angle - 90)
         
-        self.blit_coordinates = (self.coordinates[0] + math.cos(rad) * 50, self.coordinates[1] + math.sin(rad) * 50)
+        # if the gun sprite is upside down, mirror it
+        if rad > math.pi / 2 or rad < -math.pi / 2:
+            self.image_dummy = pygame.transform.flip(self.image, False, True)
+            self.image_dummy = pygame.transform.rotate(self.image_dummy, angle - 90)
+            
+        else:
+            self.image_dummy = pygame.transform.rotate(self.image, angle - 90)
+        
+        self.blit_coordinates = (self.coordinates[0] + math.cos(rad) * 20, self.coordinates[1] + math.sin(rad) * 30)
 
     def update(self, win):
         win.blit(self.image_dummy, (self.blit_coordinates[0] - self.image_dummy.get_width() // 2,
