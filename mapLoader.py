@@ -5,8 +5,8 @@ pygame.init()
 info = pygame.display.Info()
 W, H = info.current_w, info.current_h
 
-bg1, obstacles1 = pygame.transform.scale(pygame.image.load("images/map/1/bg.png"), (W, H)),\
-                  pygame.transform.scale(pygame.image.load("images/map/1/obstacles.png"), (W, H))
+bg1, obstacles1 = pygame.transform.scale(pygame.image.load("images/map/1/bg.png").convert_alpha(), (W, H)),\
+                  pygame.transform.scale(pygame.image.load("images/map/1/obstacles.png").convert_alpha(), (W, H))
 
 maps = {"1": [bg1, obstacles1]
         }
