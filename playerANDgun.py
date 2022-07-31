@@ -83,9 +83,6 @@ class Player(Main):
         mx, my = pygame.mouse.get_pos()
         rad = math.atan2(mx - self.coordinates[0], my - self.coordinates[1])
         self.angle = math.degrees(rad)
-        # а что если не будем поворачивать спрайт? выглядит не оч просто
-        
-        
 
     def update(self, win):
         win.blit(self.image_dummy, (self.coordinates[0] - self.image_dummy.get_width() // 2,
