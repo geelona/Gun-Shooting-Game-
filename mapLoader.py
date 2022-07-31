@@ -14,6 +14,14 @@ maps = {"1": [bg1, obstacles1]
 current_map = 1
 
 
-def map_controller(win):
-    win.blit(maps[f"{current_map}"][0], (0, 0))
-    win.blit(maps[f"{current_map}"][1], (0, 0))
+class Map(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.bg = maps[f"{current_map}"][0]
+        self.obstacles = maps[f"{current_map}"][1]
+        self.obstacles_mask = pygame.mask.from_surface(self.obstacles)
+        self.coordinates = [0, 0]
+
+    def update(self, win):
+        # win.blit(self.bg, self.coordinates)
+        win.blit(self.obstacles, self.coordinates)

@@ -3,9 +3,10 @@ import math
 
 pygame.init()
 
+player_size = 60
 player_img = pygame.image.load('images/Egg.png').convert_alpha()
 player_img.set_alpha(255)
-player_img = pygame.transform.scale(player_img, (60, 60))
+player_img = pygame.transform.scale(player_img, (player_size, player_size))
 
 gun_img = pygame.image.load('images/shotgun.png').convert_alpha()
 gun_img.set_alpha(255)
@@ -76,6 +77,7 @@ class Player(Main):
         super().__init__(w, h)
         self.image = player_img
         self.image_dummy = self.image
+        self.player_image_mask = pygame.mask.from_surface(self.image)
 
     def rotate(self):
         mx, my = pygame.mouse.get_pos()

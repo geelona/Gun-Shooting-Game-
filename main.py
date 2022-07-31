@@ -1,9 +1,14 @@
+import math
+
 import pygame
 import sys
 
 from screen import win, W, H
-from playerANDgun import Player, Gun
-from mapLoader import map_controller
+from playerANDgun import Player, Gun, player_size
+from mapLoader import Map
+from collisions import collide_detector
+
+color = (255, 0, 0)
 
 pygame.init()
 
@@ -14,13 +19,32 @@ player_group = pygame.sprite.Group()
 player_group.add(egg)
 player_group.add(gun)
 
+current_map = Map()
+
 
 def functionality():
+    global color
     egg.rotate()
     gun.rotate(egg.angle)
 
     egg.move()
     gun.move()
+
+#collision--------------------------------------------------------------------------------------------------------------
+    collide = collide_detector(current_map.coordinates, egg.coordinates,
+                               current_map.obstacles_mask, egg.player_image_mask, player_size)
+    if collide[0]:
+        color = (0, 255, 0)
+
+        rad = math.atan2(egg.coordinates[1] - collide[1][1], egg.coordinates[0] - collide[1][0])
+
+        egg.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
+        egg.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
+        gun.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
+        gun.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
+    else:
+        color = (255, 0, 0)
+#collision--------------------------------------------------------------------------------------------------------------
 
 
 def sprite_drawer():
@@ -28,8 +52,8 @@ def sprite_drawer():
 
 
 def map_drawer():
-    win.fill((255, 255, 255))
-    map_controller(win)
+    win.fill(color)
+    current_map.update(win)
 
 
 def main():
