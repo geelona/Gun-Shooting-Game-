@@ -37,14 +37,14 @@ def functionality():
      
         rad = math.atan2(egg.coordinates[1] - collide[1][1], egg.coordinates[0] - collide[1][0])
      
-        egg.coordinates[0] += math.cos(rad) * egg.dx * 3
-        egg.coordinates[1] += math.sin(rad) * egg.dy * 3
-        gun.coordinates[0] += math.cos(rad) * egg.dx * 3
-        gun.coordinates[1] += math.sin(rad) * egg.dy * 3
-        egg.dx = 0
-        egg.dy = 0
-        gun.dx = 0
-        gun.dy = 0
+        egg.coordinates[0] += math.cos(rad) + egg.dx 
+        egg.coordinates[1] += math.sin(rad) + egg.dy + 3 if egg.dy < 0 else math.sin(rad) + egg.dy - 3
+        gun.coordinates[0] += math.cos(rad) + egg.dx
+        gun.coordinates[1] += math.sin(rad) + egg.dy + 3 if gun.dy < 0 else math.sin(rad) + egg.dy - 3
+        
+        egg.coordinates[1] -= math.sin(rad)
+        gun.coordinates[1] -= math.sin(rad)
+
     else:
         color = (255, 0, 0)
 
@@ -63,8 +63,8 @@ def main():
     run = True
     while run:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+            if event.type == pygame.quit:
+                run = false
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
