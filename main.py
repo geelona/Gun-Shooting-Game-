@@ -30,21 +30,23 @@ def functionality():
     egg.move()
     gun.move()
 
-#collision--------------------------------------------------------------------------------------------------------------
-    # collide = collide_detector(current_map.coordinates, egg.coordinates,
-    #                            current_map.obstacles_mask, egg.player_image_mask, player_size)
-    # if collide[0]:
-    #     color = (0, 255, 0)
-    #
-    #     rad = math.atan2(egg.coordinates[1] - collide[1][1], egg.coordinates[0] - collide[1][0])
-    #
-    #     egg.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
-    #     egg.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
-    #     gun.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
-    #     gun.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
-    # else:
-    #     color = (255, 0, 0)
-#collision--------------------------------------------------------------------------------------------------------------
+    collide = collide_detector(current_map.coordinates, egg.coordinates,
+                               current_map.obstacles_mask, egg.player_image_mask, player_size)
+    if collide[0]:
+	egg.dx = 0
+	egg.dy = 0
+	gun.dx = 0
+	gun.dy = 0
+        color = (0, 255, 0)
+     
+        rad = math.atan2(egg.coordinates[1] - collide[1][1], egg.coordinates[0] - collide[1][0])
+     
+        egg.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
+        egg.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
+        gun.coordinates[0] += math.cos(rad) * (egg.dx + 1) * 3
+        gun.coordinates[1] += math.sin(rad) * (egg.dy + 1) * 3
+    else:
+        color = (255, 0, 0)
 
 
 def sprite_drawer():
