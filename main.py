@@ -26,6 +26,7 @@ def functionality():
     egg.rotate()
     gun.rotate(egg.angle)
 
+#collision---------------------------------------------------------------------------------------------------------------------
     collide = collide_detector(current_map.coordinates, egg.coordinates,
                                current_map.obstacles_mask, egg.player_image_mask, player_size)
 
@@ -52,6 +53,7 @@ def functionality():
 
         if gravity_collide[0] is False: egg.coordinates[1] += 3
         if gravity_collide[0] is False: gun.coordinates[1] += 3
+#collision---------------------------------------------------------------------------------------------------------------------
 
     egg.move()
     gun.move()
