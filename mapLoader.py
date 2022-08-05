@@ -23,5 +23,5 @@ class Map(pygame.sprite.Sprite):
         self.coordinates = [0, 0]
 
     def update(self, win):
-        # win.blit(self.bg, self.coordinates)
+        win.blit(self.bg, self.coordinates)
         win.blit(self.obstacles, self.coordinates)

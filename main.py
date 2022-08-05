@@ -26,35 +26,41 @@ def functionality():
     egg.rotate()
     gun.rotate(egg.angle)
 
-    egg.move()
-    gun.move()
-
     collide = collide_detector(current_map.coordinates, egg.coordinates,
                                current_map.obstacles_mask, egg.player_image_mask, player_size)
+
+    after_shoot_collide = collide_detector(current_map.coordinates, [egg.coordinates[0] - egg.dx, egg.coordinates[1] - egg.dy],
+                               current_map.obstacles_mask, egg.player_image_mask, player_size)
+
+    gravity_collide = collide_detector(current_map.coordinates, [egg.coordinates[0], egg.coordinates[1] - 3],
+                               current_map.obstacles_mask, egg.player_image_mask, player_size)
+
     if collide[0]:
-       
-        color = (0, 255, 0)
+
+        if after_shoot_collide[0]: egg.dx = 0  
+        if after_shoot_collide[1]: egg.dy = 0
+        if after_shoot_collide[0]: gun.dx = 0
+        if after_shoot_collide[1]: gun.dy = 0
      
         rad = math.atan2(egg.coordinates[1] - collide[1][1], egg.coordinates[0] - collide[1][0])
      
-        egg.coordinates[0] += math.cos(rad) + egg.dx 
-        egg.coordinates[1] += math.sin(rad) + egg.dy + 3 if egg.dy < 0 else math.sin(rad) + egg.dy - 3
-        gun.coordinates[0] += math.cos(rad) + egg.dx
-        gun.coordinates[1] += math.sin(rad) + egg.dy + 3 if gun.dy < 0 else math.sin(rad) + egg.dy - 3
+        egg.coordinates[1] += math.sin(rad) + 3 if egg.dy < 0 else math.sin(rad) - 3
+        gun.coordinates[1] += math.sin(rad) + 3 if gun.dy < 0 else math.sin(rad) - 3
         
         egg.coordinates[1] -= math.sin(rad)
         gun.coordinates[1] -= math.sin(rad)
 
-    else:
-        color = (255, 0, 0)
+        if gravity_collide[0] is False: egg.coordinates[1] += 3
+        if gravity_collide[0] is False: gun.coordinates[1] += 3
 
+    egg.move()
+    gun.move()
 
 def sprite_drawer():
     player_group.update(win)
 
 
 def map_drawer():
-    win.fill(color)
     current_map.update(win)
 
 
